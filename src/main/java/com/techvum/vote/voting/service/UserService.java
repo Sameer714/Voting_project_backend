@@ -45,4 +45,6 @@ public class UserService {
 	}
 		throw new DuplicateUsernameException("Email id Already Registered!", "Duplicate :");
 }
+	
+	
 }

@@ -21,7 +21,7 @@ public class UserController {
 	@Autowired
 	UserService userService;
 	
-	@PostMapping("/createuser")
+	@PostMapping(value = "/createuser", produces = "application/json")
 	public ResponseEntity<Object> saveUser (@RequestBody User user) throws DuplicateUsernameException{
 		try {
 			User entryUser = userService.saveUser(user);
