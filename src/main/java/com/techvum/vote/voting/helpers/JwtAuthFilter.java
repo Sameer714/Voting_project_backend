@@ -51,7 +51,7 @@ public class JwtAuthFilter extends OncePerRequestFilter{
 		}
 		if (username != null && SecurityContextHolder.getContext().getAuthentication() == null) {
 			System.out.println(username);
-			User users = userRepo.findByUserName(username);
+			User users = userRepo.findByUsername(username);
 			if (users != null) {
 				Boolean validateToken = jwtHelper.validateToken(token, users);
 				if (validateToken) {
@@ -67,6 +67,5 @@ public class JwtAuthFilter extends OncePerRequestFilter{
 			}
 		}
 		filterChain.doFilter(request, response);
-
 	}
 }

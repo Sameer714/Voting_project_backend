@@ -13,8 +13,8 @@ public interface UserRepo extends JpaRepository<User, Long> {
 	List<User> findAll();
 
 	User findById(long id);
-	User findByUserName(String userName);
-	User findByEmail(String gmail);
+	User findByUsername(String username);
+	User findByEmail(String email);
 	List<User> findAllByStatusAndRole(String status, String role);
 
 

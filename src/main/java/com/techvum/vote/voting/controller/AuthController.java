@@ -19,17 +19,18 @@ public class AuthController {
     @Autowired
     private UserRepo userRepo;
     
+    @Autowired
     private JwtHelper jwtHelper;
     
     @PostMapping("/login")
     public ResponseEntity<GlobalInput.JwtResponse> login(@RequestBody GlobalInput.JwtRequest request) {
         JwtResponse response = new JwtResponse();
         
-        User user = userRepo.findByEmail(request.getGmail());
+        User user = userRepo.findByEmail(request.getEmail());
         
         if (user != null) {
             if (!user.getStatus().equalsIgnoreCase("ACTIVE")) {
-                response.setUsernm("USER INACTIVE!");
+                response.setUsername("USER INACTIVE!");
                 return new ResponseEntity<>(response, HttpStatus.OK);
             }
 
@@ -37,17 +38,17 @@ public class AuthController {
                 String token = jwtHelper.generateToken(user);
 
                 response.setJwtoken(token);
-                response.setUsernm(user.getUsername());
+                response.setUsername(user.getUsername());
                 response.setRole(user.getRole());
                 response.setId(user.getId());
 
                 return new ResponseEntity<>(response, HttpStatus.OK);
             } else {
-                response.setUsernm("Invalid Credentials!");
+                response.setUsername("Invalid Credentials!");
                 return new ResponseEntity<>(response, HttpStatus.UNAUTHORIZED);
             }
         } else {
-            response.setUsernm("User not found!");
+            response.setUsername("User not found!");
             return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
         }
     }

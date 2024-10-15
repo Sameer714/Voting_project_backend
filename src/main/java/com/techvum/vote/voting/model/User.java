@@ -1,5 +1,13 @@
 package com.techvum.vote.voting.model;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -7,8 +15,9 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
 @Entity
-public class User {
-	
+public class User implements UserDetails{
+	private static final long serialVersionUID = 1L;
+
 	@Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
 	@Column(name="Id")
@@ -126,4 +135,46 @@ public class User {
 		super();
 	}
 	
+	@Override
+	public Collection<? extends GrantedAuthority> getAuthorities() {
+		List<GrantedAuthority> listRole = new ArrayList<GrantedAuthority>();
+		listRole.add(new SimpleGrantedAuthority(this.role));
+		return listRole;
+	}
+
+
+
+	@Override
+	public boolean isAccountNonExpired() {
+		return true;
+	}
+
+	@Override
+	public boolean isAccountNonLocked() {
+		return true;
+	}
+
+	@Override
+	public boolean isCredentialsNonExpired() {
+		if (pass.isEmpty() || username.isEmpty()) {
+			return false;
+		} else {
+			return true;
+		}
+	}
+
+	@Override
+	public boolean isEnabled() {
+		if (pass.isEmpty() || username.isEmpty()) {
+			return false;
+		} else {
+			return true;
+		}
+	}
+
+
+	@Override
+	public String getPassword() {
+		return null;
+	}
 }

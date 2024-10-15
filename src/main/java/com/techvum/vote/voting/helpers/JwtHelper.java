@@ -5,6 +5,8 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Function;
 
+import org.springframework.stereotype.Component;
+
 import com.techvum.vote.voting.model.User;
 
 import io.jsonwebtoken.Claims;
@@ -13,6 +15,7 @@ import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.security.Keys;
 import java.security.Key;
 
+@Component
 public class JwtHelper {
 
     public User user;
@@ -59,7 +62,7 @@ public class JwtHelper {
                 .setSubject(subject)
                 .setIssuedAt(new Date(System.currentTimeMillis()))
                 .setExpiration(new Date(System.currentTimeMillis() + JWT_TOKEN_VALIDITY * 1000))
-                .signWith(key, SignatureAlgorithm.HS512) // Use the key and algorithm
+                .signWith(key, SignatureAlgorithm.HS512)
                 .compact();
     }
 

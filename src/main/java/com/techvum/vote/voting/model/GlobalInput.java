@@ -34,7 +34,7 @@ public class GlobalInput {
 	public static class JwtResponse {
 		
 		private String Jwtoken;
-		private String usernm;
+		private String username;
 		private String role;
 		private long id;
 		
@@ -44,11 +44,11 @@ public class GlobalInput {
 		public void setJwtoken(String jwtoken) {
 			Jwtoken = jwtoken;
 		}
-		public String getUsernm() {
-			return usernm;
+		public String getUsername() {
+			return username;
 		}
-		public void setUsernm(String usernm) {
-			this.usernm = usernm;
+		public void setUsername(String username) {
+			this.username = username;
 		}
 		public String getRole() {
 			return role;
@@ -63,10 +63,10 @@ public class GlobalInput {
 			this.id = id;
 		}
 		
-		public JwtResponse(String jwtoken, String usernm, String role, long id) {
+		public JwtResponse(String jwtoken, String username, String role, long id) {
 			super();
 			Jwtoken = jwtoken;
-			this.usernm = usernm;
+			this.username = username;
 			this.role = role;
 			this.id = id;
 		}
@@ -76,42 +76,42 @@ public class GlobalInput {
 		}
 		@Override
 		public String toString() {
-			return "JwtResponse [Jwtoken=" + Jwtoken + ", usernm=" + usernm + ", role=" + role + ", id=" + id + "]";
+			return "JwtResponse [Jwtoken=" + Jwtoken + ", usernm=" + username + ", role=" + role + ", id=" + id + "]";
 		}
 	}
 	
 	public static class JwtRequest {
-		private String gmail;
+		private String email;
 		private String pass;
 		
 		public JwtRequest() {
 		}
 		
-		public JwtRequest(String gmail, String passw) {
+		public JwtRequest(String email, String pass) {
 			super();
-			this.gmail = gmail;
+			this.email = email;
 			this.pass = pass;
 		}
 		
-		public String getGmail() {
-			return gmail;
+		public String getEmail() {
+			return email;
 		}
 		
-		public void setGmail(String gmail) {
-			this.gmail = gmail;
+		public void setEmail(String email) {
+			this.email = email;
 		}
 		
 		public String getPass() {
 			return pass;
 		}
 		
-		public void setPass(String passw) {
-			this.pass = passw;
+		public void setPass(String pass) {
+			this.pass = pass;
 		}
 		
 		@Override
 		public String toString() {
-			return "JwtRequest [gmail=" + gmail + ", passw=" + pass+ "]";
+			return "JwtRequest [email=" + email + ", pass=" + pass+ "]";
 		}
 	}
 }
