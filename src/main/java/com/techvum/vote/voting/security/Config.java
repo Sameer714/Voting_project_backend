@@ -35,6 +35,8 @@ public class Config {
             .authorizeHttpRequests(auth -> auth
                 .requestMatchers(HttpMethod.POST, "/user/createuser").permitAll()
                 .requestMatchers("/login").permitAll()
+                .requestMatchers("/api/votes").permitAll()
+
                 .anyRequest().authenticated()
             )
             .exceptionHandling(ex -> ex.authenticationEntryPoint((AuthenticationEntryPoint) point))
@@ -50,7 +52,7 @@ public class Config {
     }
 
     @Bean
-    public InMemoryUserDetailsManager inMemoryUserDetailsManager() {
+    InMemoryUserDetailsManager inMemoryUserDetailsManager() {
         return new InMemoryUserDetailsManager();
     }
 }
