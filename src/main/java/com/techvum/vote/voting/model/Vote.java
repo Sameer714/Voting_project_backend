@@ -13,7 +13,7 @@ import jakarta.persistence.Table;
 import jakarta.persistence.UniqueConstraint;
 
 // Import the Query class
-import com.techvum.vote.voting.model.GlobalInput.Query;
+import com.techvum.vote.voting.model.Query;
 
 @Entity
 @Table(name = "vote", uniqueConstraints = {
