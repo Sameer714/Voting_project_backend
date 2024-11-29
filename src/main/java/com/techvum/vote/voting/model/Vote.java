@@ -12,9 +12,6 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import jakarta.persistence.UniqueConstraint;
 
-// Import the Query class
-import com.techvum.vote.voting.model.Query;
-
 @Entity
 @Table(name = "vote", uniqueConstraints = {
     @UniqueConstraint(columnNames = {"user_id", "query_id"})

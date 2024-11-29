@@ -53,13 +53,11 @@ public class User implements UserDetails{
 		this.username = username;
 	}
 
-
 	@Override
 	public String toString() {
 		return "User [id=" + id + ", name=" + name + ", pass=" + pass + ", role=" + role + ", email=" + email
 				+ ", status=" + status + ", username=" + username + "]";
 	}
-
 
 	public long getId() {
 		return id;
@@ -141,8 +139,6 @@ public class User implements UserDetails{
 		listRole.add(new SimpleGrantedAuthority(this.role));
 		return listRole;
 	}
-
-
 
 	@Override
 	public boolean isAccountNonExpired() {

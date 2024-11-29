@@ -10,7 +10,7 @@ import com.techvum.vote.voting.repo.UserRepo;
 
 @Service
 public class UserService {
-	
+
 	@Autowired
 	UserRepo userRepo;
 
@@ -45,6 +45,4 @@ public class UserService {
 	}
 		throw new DuplicateUsernameException("Email id Already Registered!", "Duplicate :");
 }
-	
-	
 }

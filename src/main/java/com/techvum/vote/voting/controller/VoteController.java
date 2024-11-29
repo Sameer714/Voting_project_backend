@@ -4,8 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import com.techvum.vote.voting.model.GlobalInput;
 import com.techvum.vote.voting.model.Vote;
+import com.techvum.vote.voting.model.VoteRequest;
 import com.techvum.vote.voting.service.VoteService;
 
 @RestController
@@ -16,8 +16,8 @@ public class VoteController {
     private VoteService voteService;
 
     @PostMapping
-    public ResponseEntity<Vote> castVote(GlobalInput.VoteRequest voteRequest) {
-        Vote vote = voteService.castVote(voteRequest);
+    public ResponseEntity<ResponseEntity<Object>> castVote(@RequestBody VoteRequest voteRequest) {
+        ResponseEntity<Object> vote = voteService.castVote(voteRequest);
         return ResponseEntity.ok(vote);
     }
 }
