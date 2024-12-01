@@ -52,7 +52,7 @@ public class JwtHelper {
         Map<String, Object> claims = new HashMap<>();
         claims.put("name", user.getName());
         claims.put("email", user.getEmail());
-        claims.put("role", user.getRole());
+        claims.put("role", user.getRole().toUpperCase());
         return doGenerateToken(claims, user.getUsername());
     }
     
