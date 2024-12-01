@@ -1,4 +1,4 @@
-package com.example.login.duplicate;
+package com.example.vote.duplicate;
 
 public class DuplicateUsernameException extends Exception {
 	private static final long serialVersionUID = 1L;

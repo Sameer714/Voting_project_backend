@@ -3,7 +3,6 @@ package com.techvum.vote.voting.service;
 import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -31,31 +30,30 @@ public class VoteService {
     private UserRepo userRepo;
 
     public ResponseEntity<Object> castVote(VoteRequest voteRequest) {
-        Optional<Query> queryOptional = queryRepo.findById(voteRequest.getQueryId());
         Map<String, Object> response = new HashMap<>();
         
-        if (!queryOptional.isPresent()) {
+        Query query = queryRepo.findById(voteRequest.getQueryId()).orElse(null);
+        if (query == null) {
             response.put("message", "Query not found");
             response.put("Success", "false");
             return ResponseEntity.status(HttpStatus.OK).body(response);
         }
-        Query query = queryOptional.get();
 
-        Optional<User> userOptional = userRepo.findById(voteRequest.getUserId());
-        if (!userOptional.isPresent()) {
+
+        User user = userRepo.findById(voteRequest.getUserId());
+        if (user == null) {
             response.put("message", "User not found");
             response.put("Success", "false");
             return ResponseEntity.status(HttpStatus.OK).body(response);
         }
-        User user = userOptional.get();
 
-        Optional<Vote> existingVote = voteRepo.findByQueryAndUser(query, user);
-        if (existingVote.isPresent()) {
+        Vote existingVote = voteRepo.findByQueryAndUser(query, user);
+        if (existingVote != null) {
             response.put("message", "User has already voted on this query");
             response.put("Success", "false");
             return ResponseEntity.status(HttpStatus.OK).body(response);
         }
-
+        
         Vote vote = new Vote();
         vote.setQuery(query);
         vote.setUser(user);
