@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.techvum.vote.voting.helpers.PasswordChecker;
+import com.example.vote.duplicate.ApiResponse;
 import com.example.vote.duplicate.DuplicateUsernameException;
 import com.techvum.vote.voting.model.User;
 import com.techvum.vote.voting.repo.UserRepo;
@@ -91,19 +92,26 @@ public class UserService {
 		return userRepo.findAllByStatusAndRole("INACTIVE","ROLE_ADMIN");
 	}
 
-	public ResponseEntity<String> updateStatus(long id) {
-		User user = userRepo.findById(id);
-		if(user.getStatus().equalsIgnoreCase("INACTIVE")) {
-			user.setStatus("ACTIVE");
-			userRepo.save(user);
-			return ResponseEntity.status(HttpStatus.OK).body("{\"message\": \"" + "Updated Successfully" + "\" ,  \"Success\": \"" + "true" + "\"}");
-		}
-		else {
-			user.setStatus("INACTIVE");
-			userRepo.save(user);
-			return ResponseEntity.status(HttpStatus.OK).body("{\"message\": \"" + "Updated Successfully" + "\" ,  \"Success\": \"" + "true" + "\"}");
-		}
-	}
+	public ResponseEntity<Object> updateStatus(long id) throws DuplicateUsernameException {
+		 User user = userRepo.findById(id);
+
+	        if (user == null) {
+	            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+	                .body(new ApiResponse("User not found!", false));
+	        }
+
+	        if (user.getStatus().equalsIgnoreCase("INACTIVE")) {
+	            user.setStatus("ACTIVE");
+	        } else {
+	            user.setStatus("INACTIVE");
+	        }
+	        
+	        userRepo.save(user);
+
+	        ApiResponse response = new ApiResponse("Updated Successfully", true);
+	        return ResponseEntity.status(HttpStatus.OK).body(response);
+	    }
+	
 
 	public List<User> getAllUsers() {
 		return userRepo.findAll();	}

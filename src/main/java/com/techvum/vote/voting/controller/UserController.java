@@ -80,7 +80,7 @@ public class UserController {
 
 	@PutMapping("/updateStatus/{id}")
 	@PreAuthorize("hasAuthority('ROLE_ADMIN')")
-	public ResponseEntity<String> updateStatus(@PathVariable long id) {
+	public ResponseEntity<Object> updateStatus(@PathVariable long id) throws DuplicateUsernameException{
 		return userService.updateStatus(id);
 	}
 }
