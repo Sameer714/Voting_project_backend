@@ -35,6 +35,8 @@ public class Config {
                 .requestMatchers(HttpMethod.POST, "/user/createuser").permitAll()
                 .requestMatchers("/login").permitAll()
                 .requestMatchers("/api/votes").permitAll()
+                .requestMatchers("/api/queries").permitAll()
+
 
                 .anyRequest().authenticated()
             )

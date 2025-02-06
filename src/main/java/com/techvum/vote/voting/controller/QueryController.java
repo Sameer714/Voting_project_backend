@@ -2,6 +2,7 @@ package com.techvum.vote.voting.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import com.techvum.vote.voting.model.Query;
@@ -16,7 +17,8 @@ public class QueryController {
 	@Autowired
     private QueryService queryService;
 
-    @PostMapping
+    @PostMapping 
+	@PreAuthorize("hasAuthority('ROLE_ADMIN')")
     public ResponseEntity<Query> createQuery(@RequestBody Query query) {
         Query createdQuery = queryService.createQuery(query);
         return ResponseEntity.ok(createdQuery);

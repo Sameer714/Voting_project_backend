@@ -71,7 +71,7 @@ public class UserController {
 		}
 		return null;
 	}
-	
+
 	@GetMapping("/getAllUserToApprove")
 	@PreAuthorize("hasAuthority('ROLE_ADMIN')")
 	public List<User> getAllUserToApprove() {

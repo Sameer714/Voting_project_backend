@@ -9,5 +9,4 @@ public class RealTimeVotingApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(RealTimeVotingApplication.class, args);
 	}
-
 }
